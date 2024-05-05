@@ -3,17 +3,13 @@
 #include <sstream>
 #include <cassert>
 
-// using namespace std;
-using std::cout;
-using std::endl;
-using std::string;
-
+using namespace std;
 
 void test_autosort_list_constructor();
 
 // list.h
 struct node {
-    int size_data;
+    int data;
     node *next;
 };
 
@@ -22,45 +18,98 @@ class list {
         node *head;
 
     public:
-        list();
-        void insert(int data);
+        void create_list();
+        int ask_for_data();
+        void insert();
+        void display_list();
+        void display_element();
         std::string to_string();
 };
 
 
-// this actually instantiates the list, the stuff before was just defining
-list::list() {
+// this method actually instantiates the list, the stuff before was just defining
+void list::create_list() {
     head = nullptr;
 }
 
+// I had this in the insert function at first, but hated that. This
+// makes it way simpler, because I can use it it more functions easily
+// does not handle string (could use to_string, but that is stolen code)
+int list::ask_for_data() {
+    int user_data;
+    cout << "what is the element?" << endl;
+    cin >> user_data;
+    return user_data;
+    cout << "end of ask_for_data" << endl;
+}
 
-void list::insert(int size_data) {\
+// call this in main with my_list.insert()
+void list::insert() {
+    int size_data = ask_for_data();
     // create new node pointing to nullptr
     node *new_node = new node;
-    new_node->size_data = size_data;
+    // insert starts at (size_data) which is the place in the list... supposedly...
+    new_node->data = size_data;
     new_node->next = nullptr;
 
+    // // clear input buffer
+    // // learned at https://www.geeksforgeeks.org/clearing-the-input-buffer-in-cc/# 
+    // // (but was in the google search page)
+    // fflush(stdin);
+
     // if the node points to nullptr, list is empty
-    if(head == nullptr) {
+    // and data at the head is larger than the user input
+    // place on left side by shifting pointer
+    if (head == nullptr || size_data < head->data) {
+        new_node->next = head;
         head = new_node;
-    } else {
-        // else list is populated, so size_data is compared
-        // smaller size_data goes to front of ptr, larger goes to back
-        cout << "please finish this code after lunch!" << endl;
+        return;
     }
+
+    // else list is populated, so smaller data goes 
+    // to front of ptr, larger goes to back
+
+    // had help from chat GPT for this part...
+    node *current = head;
+    // while the next pointer
+    while (current->next != nullptr && current->next->data < size_data) {
+        current = current->next;
+    }
+
+    new_node->next = current->next;
+    current->next = new_node;
 }
 
 
 
+void list::display_list() {
+    cout << "begin display_list" << endl;
+    node *temp = head;
+
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+
+    cout << "\nend of display_list" << endl;
+
+}
 
 
-
-
-
+void list::display_element() {
+    cout << "this is supposed to print the single node" << endl;
+    // to do: ask for element to search for
+    // binary search for that element.
+    // if you find the element... do what? display and say success?
+    // else, element is not in list.
+    // this is my search function
+}
 
 
 
 // COPY/PASTA LEARNING TO TEST!!!
+// --------------------------------------
+// idk what this method is for.
 string list::to_string() {
     std::stringstream result_string_stream;
     if(head == nullptr){
@@ -69,7 +118,7 @@ string list::to_string() {
         node *current = head;
         result_string_stream << "[";
         while (current != nullptr) {
-            result_string_stream << current->size_data;
+            result_string_stream << current->data;
             if(current->next != nullptr) {
                 result_string_stream << ", ";
             }
@@ -94,12 +143,40 @@ void test_autosort_list_constructor() {
 
     assert(expected_result.compare(actual_result) == 0);
 }
+// END COPY/PASTA
+// ----------------------------------
+
+
 
 int main() {
-    test_autosort_list_constructor();
+    list my_list;
+    my_list.create_list();
+    my_list.display_list();
+    // test_autosort_list_constructor();
+    // my_list.create_list();
+    // my_list.to_string();
+    // my_list.display_list();
+    // my_list.insert(0);
+    // my_list.insert(1);
+    // my_list.insert(2);
+    // my_list.insert(3);
+    // my_list.insert(4);
+    // my_list.insert(5);
+    // my_list.insert(6);
+
+    // how handle the size of list? 
+    // Right now it's dictated by these
+    my_list.insert();
+    my_list.insert();
+    my_list.insert();
+    my_list.insert();
+    my_list.insert();
+    my_list.insert();
+    my_list.insert();
+    my_list.insert();
+    my_list.display_list();
+    // I know that "pause" is not the best option to use here
+    // to keep the window open, but I like the "press any key" thing, hehe.
     system("pause");
     return 0;
-    // system("pause");
 }
-
-// END COPY/PASTA
