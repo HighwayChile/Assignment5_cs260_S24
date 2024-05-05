@@ -29,6 +29,7 @@ class list {
 
 // this method actually instantiates the list, the stuff before was just defining
 void list::create_list() {
+    // head is the beginning of the linked list
     head = nullptr;
 }
 
@@ -36,6 +37,7 @@ void list::create_list() {
 // makes it way simpler, because I can use it it more functions easily
 // does not handle string (could use to_string, but that is stolen code)
 int list::ask_for_data() {
+    // this code does the asking for user input. Returns int.
     int user_data;
     cout << "what is the element?" << endl;
     cin >> user_data;
@@ -48,7 +50,7 @@ void list::insert() {
     int size_data = ask_for_data();
     // create new node pointing to nullptr
     node *new_node = new node;
-    // insert starts at (size_data) which is the place in the list... supposedly...
+    // the value of the new element is defined here
     new_node->data = size_data;
     new_node->next = nullptr;
 
@@ -58,8 +60,8 @@ void list::insert() {
     // fflush(stdin);
 
     // if the node points to nullptr, list is empty
-    // and data at the head is larger than the user input
-    // place on left side by shifting pointer
+    // and if data at the head is larger than the user input
+    // place on left side by shifting the pointer
     if (head == nullptr || size_data < head->data) {
         new_node->next = head;
         head = new_node;
@@ -69,15 +71,20 @@ void list::insert() {
     // else list is populated, so smaller data goes 
     // to front of ptr, larger goes to back
 
-    // had help from chat GPT for this part...
-    node *current = head;
-    // while the next pointer
-    while (current->next != nullptr && current->next->data < size_data) {
-        current = current->next;
+    // had help from chat GPT for this part... 
+    // this is the part that sorts.
+    // create temporary node starting at the beginning of the list, The "head"
+    node *temp = head;
+    // traverse the list.
+    /* while the temp node does not point at nullptr, and the data of the NEXT 
+    node is less than the user input value, */
+    while (temp->next != nullptr && temp->next->data < size_data) {
+        // shift node and traverse one step in list until it matches size_data
+        temp = temp->next;
     }
 
-    new_node->next = current->next;
-    current->next = new_node;
+    new_node->next = temp->next;
+    temp->next = new_node;
 }
 
 
@@ -89,10 +96,10 @@ void list::display_list() {
     while (temp != nullptr) {
         cout << temp->data << " ";
         temp = temp->next;
+        // cout << endl;
     }
-
-    cout << "\nend of display_list" << endl;
-
+    cout << endl;
+    cout << "end of display_list" << endl;
 }
 
 
@@ -176,7 +183,7 @@ int main() {
     my_list.insert();
     my_list.display_list();
     // I know that "pause" is not the best option to use here
-    // to keep the window open, but I like the "press any key" thing, hehe.
+    // to keep the window open, but I like the "press any key" thing.
     system("pause");
     return 0;
 }
