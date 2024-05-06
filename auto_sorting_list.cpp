@@ -40,7 +40,6 @@ makes it way simpler, because I can use it in more functions easily
 does not handle string  */
 int list::ask_for_data() {
     int user_data;
-    cout << "Value: ";
     cin >> user_data;
     return user_data;
 }
@@ -245,10 +244,12 @@ int main() {
                 break;
             case 3:
                 // Add item to list - working
+                cout << "Value to add: ";
                 my_list.insert(my_list.ask_for_data());
                 break;
             case 4:
                 // Search for item - not even close to working
+                cout << "Value to search: ";
                 my_list.search_element(my_list.ask_for_data());
                 break;
             case 5:
@@ -256,7 +257,7 @@ int main() {
                 test_module();
                 break;
             case 6:
-                // populate list
+                // Populate list - used in testing
                 my_list.insert(1);
                 my_list.insert(0);
                 my_list.insert(4);
@@ -280,6 +281,5 @@ int main() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
-    // system("pause");
     return 0;
 }
