@@ -43,7 +43,7 @@ int list::ask_for_data() {
     cout << "what is the element?" << endl;
     cin >> user_data;
     return user_data;
-    cout << "end of ask_for_data" << endl;
+    cout << "end of ask_for_data\n" << endl;
 }
 
 
@@ -94,19 +94,21 @@ void list::insert(int size_data) {
 void list::display_list() {
     cout << "begin display_list" << endl;
     node *temp = head;
-
+    if (temp == nullptr) {
+        cout << "[no list]";
+    }
     while (temp != nullptr) {
         cout << temp->data << " ";
         temp = temp->next;
         // cout << endl;
     }
     cout << endl;
-    cout << "end of display_list" << endl;
+    cout << "end of display_list\n" << endl;
 }
 
 
 void list::display_element() {
-    cout << "this is supposed to print the single node" << endl;
+    cout << "this is supposed to search for a single node, " << endl;
     // to do: ask for element to search for
     // binary search for that element.
     // if you find the element... do what? display and say success?
@@ -119,35 +121,18 @@ int test_module() {
     list test_list;
     test_list.create_list();
     test_list.display_list();
-    test_list.ask_for_data();
-
-    int test_num;
     
-    // how insert values? need ask_for_data to return specific things
-    // doy! Use the data in the nodes! Der! 
-    // This is still not right though. I need to figure out a while loop, I think.
+    cout << "adding values..." << endl;
+    cout << "adding: 2, 4, -2, 10, 0, 14, 1, -7\n" << endl;
     test_list.insert(2);
-    // if (cout << "what is the element?"){
-    //     cout << "2" << endl;
-    //     return;
-    // }
-
     test_list.insert(4);
-    // cin >> "-1";
     test_list.insert(-2);
-    // cin >> "10";
-    // test_list.insert();
-    // cin >> "5";
-    // test_list.insert();
-    // cin >> "0";
-    // test_list.insert();
-    // cin >> "14";
-    // test_list.insert();
-    // cin >> "2";
-    // test_list.insert();
-    // cin >> "-7";
+    test_list.insert(10);
+    test_list.insert(0);
+    test_list.insert(14);
+    test_list.insert(1);
+    test_list.insert(-7);
     test_list.display_list();
-    // system("pause");
     return 0;
 }
 
@@ -195,27 +180,24 @@ void test_autosort_list_constructor() {
 
 
 int main() {
-    // list my_list;
-    // my_list.create_list();
-    // my_list.display_list();
+    list my_list;
+    my_list.create_list();
+    my_list.display_list();
     // // test_autosort_list_constructor();
     // // my_list.create_list();
     // // my_list.to_string();
     // // my_list.display_list();
-
+    // int data_asked = my_list.ask_for_data();
     // // how handle the size of list? 
     // // Right now it's dictated by these
     // // I think I will use the same menu from before. (switch)
     // // Yes, use the same menu and add a switch option for "test_module"
-    // my_list.insert();
-    // my_list.insert();
-    // my_list.insert();
-    // my_list.insert();
-    // my_list.insert();
-    // my_list.insert();
-    // my_list.insert();
-    // my_list.insert();
-    // my_list.display_list();
+    // // WOOT! IS WORKING! TOTALLY WIZARD!
+    my_list.insert(my_list.ask_for_data());
+    my_list.insert(my_list.ask_for_data());
+    my_list.insert(my_list.ask_for_data());
+    my_list.insert(my_list.ask_for_data());
+    my_list.display_list();
 
     // // I know that "pause" is not the best option to use here
     // // to keep the window open, but I like the "press any key" thing.
