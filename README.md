@@ -1,6 +1,10 @@
 # Assignment5_cs260_S24  
 Hello, welcome to readme for an auto sorting list!  
 
+# Notes  
+Okay, I am still terrible at following instructions. What we want is an auto-sorting list! I can still use large parts of 
+my design, but I need to remove some aspects, and have already implemented others. Need to search for element most of all.  
+
 
 # Instructions  
     Follow along with the in-class exercise on this, do your best to get it working, and turn in what you come up with here!  

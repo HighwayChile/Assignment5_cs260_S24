@@ -6,6 +6,7 @@
 using namespace std;
 
 void test_autosort_list_constructor();
+int test_module();
 
 // list.h
 struct node {
@@ -20,7 +21,7 @@ class list {
     public:
         void create_list();
         int ask_for_data();
-        void insert();
+        void insert(int size_data);
         void display_list();
         void display_element();
         std::string to_string();
@@ -45,9 +46,12 @@ int list::ask_for_data() {
     cout << "end of ask_for_data" << endl;
 }
 
+
+// int size_data = ask_for_data();
+
 // call this in main with my_list.insert()
-void list::insert() {
-    int size_data = ask_for_data();
+void list::insert(int size_data) {
+    // int size_data = ask_for_data();
     // create new node pointing to nullptr
     node *new_node = new node;
     // the value of the new element is defined here
@@ -68,9 +72,7 @@ void list::insert() {
         return;
     }
 
-    // else list is populated, so smaller data goes 
-    // to front of ptr, larger goes to back
-
+    // else list is populated
     // had help from chat GPT for this part... 
     // this is the part that sorts.
     // create temporary node starting at the beginning of the list, The "head"
@@ -110,6 +112,43 @@ void list::display_element() {
     // if you find the element... do what? display and say success?
     // else, element is not in list.
     // this is my search function
+}
+
+int test_module() {
+    // code here
+    list test_list;
+    test_list.create_list();
+    test_list.display_list();
+    test_list.ask_for_data();
+
+    int test_num;
+    
+    // how insert values? need ask_for_data to return specific things
+    // doy! Use the data in the nodes! Der! 
+    // This is still not right though. I need to figure out a while loop, I think.
+    test_list.insert(2);
+    // if (cout << "what is the element?"){
+    //     cout << "2" << endl;
+    //     return;
+    // }
+
+    test_list.insert(4);
+    // cin >> "-1";
+    test_list.insert(-2);
+    // cin >> "10";
+    // test_list.insert();
+    // cin >> "5";
+    // test_list.insert();
+    // cin >> "0";
+    // test_list.insert();
+    // cin >> "14";
+    // test_list.insert();
+    // cin >> "2";
+    // test_list.insert();
+    // cin >> "-7";
+    test_list.display_list();
+    // system("pause");
+    return 0;
 }
 
 
@@ -156,34 +195,32 @@ void test_autosort_list_constructor() {
 
 
 int main() {
-    list my_list;
-    my_list.create_list();
-    my_list.display_list();
-    // test_autosort_list_constructor();
+    // list my_list;
     // my_list.create_list();
-    // my_list.to_string();
     // my_list.display_list();
-    // my_list.insert(0);
-    // my_list.insert(1);
-    // my_list.insert(2);
-    // my_list.insert(3);
-    // my_list.insert(4);
-    // my_list.insert(5);
-    // my_list.insert(6);
+    // // test_autosort_list_constructor();
+    // // my_list.create_list();
+    // // my_list.to_string();
+    // // my_list.display_list();
 
-    // how handle the size of list? 
-    // Right now it's dictated by these
-    my_list.insert();
-    my_list.insert();
-    my_list.insert();
-    my_list.insert();
-    my_list.insert();
-    my_list.insert();
-    my_list.insert();
-    my_list.insert();
-    my_list.display_list();
-    // I know that "pause" is not the best option to use here
-    // to keep the window open, but I like the "press any key" thing.
+    // // how handle the size of list? 
+    // // Right now it's dictated by these
+    // // I think I will use the same menu from before. (switch)
+    // // Yes, use the same menu and add a switch option for "test_module"
+    // my_list.insert();
+    // my_list.insert();
+    // my_list.insert();
+    // my_list.insert();
+    // my_list.insert();
+    // my_list.insert();
+    // my_list.insert();
+    // my_list.insert();
+    // my_list.display_list();
+
+    // // I know that "pause" is not the best option to use here
+    // // to keep the window open, but I like the "press any key" thing.
+    // system("pause");
+    test_module();
     system("pause");
     return 0;
 }
