@@ -137,7 +137,7 @@ void reset_list_size() {
 
 int test_module() {
     reset_list_size();
-    cout << "\nTHIS IS THE TEST MODULE!" << endl;
+    cout << "\nWELCOME TO THE TEST MODULE!" << endl;
     cout << "------------------------" << endl;
     cout << "This module creates a list, then modifies that list." << endl;
     cout << "Creates separate linked list: \"test_list\"\n" << endl;
@@ -280,18 +280,6 @@ int main() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
-    system("pause");
+    // system("pause");
     return 0;
 }
-
-
-
-
-// random code that was used at one point:
-    // // test_autosort_list_constructor();
-    // // my_list.create_list();
-    // // my_list.to_string();
-    // // my_list.display_list();
-    // int data_asked = my_list.ask_for_data();
-
-
