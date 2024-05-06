@@ -100,39 +100,34 @@ void list::display_list() {
     }
     // cycle through and print the list until hits the terminal node
     // adds a whitespace and then goes to next node
-    // cout << "List: ";
     while (temp != nullptr) {
         cout << temp->data << " ";
         temp = temp->next;
     }
-    // cout << endl;
+
     return;
 }
 
 
 int list::search_element(int search_value) {
-    cout << "this is supposed to search for a single node, " << endl;
-    cout << "idk" << endl;
-
-    // int search_value = ask_for_data();
-
     // create temporary node to act as shuttle
     node *temp2 = head;
     int index = 0; // init index at 0
 
-    // this begins teh traversal and ends it, but thinking about it, i don't think I need to end it like this.
+    // this begins the traversal and ends it, but thinking about it, i don't believe I need to end it like this.
     while (temp2 != nullptr && temp2->data <= search_value){
-        //traverse
+        // this prints success message when element is found
         if (temp2->data == search_value) {
             cout << "Value " << search_value << " found at index " << index << endl;
             return index;
         }
+        // moves the pointer to next node
         temp2 = temp2->next;
         index++;
     }
 
-    // if not found
-    cout << "Sorry, " << search_value << " not found." << endl;
+    // if element is not found, print consolation message
+    cout << "Sorry, " << search_value << " not found" << endl;
     return 0;
 }
 
@@ -141,7 +136,6 @@ void reset_list_size() {
 }
 
 int test_module() {
-    // code here
     reset_list_size();
     cout << "\nTHIS IS THE TEST MODULE!" << endl;
     cout << "------------------------" << endl;
@@ -152,30 +146,57 @@ int test_module() {
     cout << "\ndisplay empty test_list" << endl;
     cout << "------------------------" << endl;
     test_list.display_list();
+
+    cout << "\n\nsearching empty list..." << endl;
+    cout << "------------------------" << endl;
+    cout << "Search for 2 - ";
+    test_list.search_element(2);
     
     cout << "\n\nadding values..." << endl;
     cout << "------------------------" << endl;
-    cout << "adding: 2, 4, -2, 10, 0, 14, 1, -7" << endl;
+    cout << "adding 10 items (in this order): 2, 4, -2, 10, 0, 1, -7, 6, 3, 5" << endl;
+
     test_list.insert(2);
     test_list.insert(4);
     test_list.insert(-2);
     test_list.insert(10);
+
     test_list.insert(0);
-    test_list.insert(14);
     test_list.insert(1);
     test_list.insert(-7);
+    test_list.insert(6);
+
+    test_list.insert(3);
+    test_list.insert(5);
+
     cout << "\ndisplay populated list..." << endl;
     cout << "------------------------" << endl;
     test_list.display_list();
 
     cout << "\n\nsearching test..." << endl;
     cout << "------------------------" << endl;
+    cout << "Search for 2 - ";
     test_list.search_element(2);
+    cout << "Search for -2 - ";
+    test_list.search_element(-2);
+    cout << "Search for 0 - ";
+    test_list.search_element(0);
+    cout << "Search for 99 - ";
     test_list.search_element(99);
+    cout << "Search for 42 - ";
+    test_list.search_element(42);
 
+    // as before, this doesn't truly delete the linked list
     cout << "\n\nclearing test data..." << endl;
     cout << "------------------------" << endl;
+    test_list.create_list();
     reset_list_size();
+
+    cout << "\n\nsearching empty list..." << endl;
+    cout << "------------------------" << endl;
+    cout << "Search for 2 - ";
+    test_list.search_element(2);
+
     return 0;
 }
 
@@ -238,7 +259,7 @@ int main() {
                 // populate list
                 my_list.insert(1);
                 my_list.insert(0);
-                my_list.insert(-42);
+                my_list.insert(4);
                 my_list.insert(9);
                 my_list.insert(7);
                 my_list.insert(2);
