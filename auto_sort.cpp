@@ -1,34 +1,11 @@
 #include <iostream>
-#include <string>
-#include <sstream>
-#include <cassert>
 #include <limits>
+#include "auto_sort.hpp"
 
 using namespace std;
 
-int test_module();
-void show_menu(void);
-
-int size_of_list = 0; // init at 0
-
-// list.hpp
-struct node {
-    int data;
-    node *next;
-};
-
-class list {
-    private:
-        node *head;
-
-    public:
-        void create_list();
-        int ask_for_data();
-        void insert(int size_data);
-        void display_list();
-        int search_element(int search_value);
-};
-
+// list size counter (had intended this for binary search)
+int size_of_list = 0;
 
 // this method actually instantiates the list, the stuff before was just defining
 void list::create_list() {
@@ -44,19 +21,16 @@ int list::ask_for_data() {
     return user_data;
 }
 
-
-// int size_data = ask_for_data();
-
-// call this in main with my_list.insert()
 void list::insert(int size_data) {
-    // create new node pointing to nullptr
+    // create new node pointing to nullptr. Need this for assigning new spot in list
+    // different from temp, because this one is actually inserted. 
+    // Learned from Joseph Jess and other online sources.
     node *new_node = new node;
-    // the value of the new element is defined here
     new_node->data = size_data;
     new_node->next = nullptr;
 
-    // if the node points to nullptr, list is empty
-    // and if data at the head is larger than the user input
+    // if the head is nullptr, list is empty
+    // or if data at the head is larger than the user input
     // place on left side by shifting the pointer
     if (head == nullptr || size_data < head->data) {
         new_node->next = head;
@@ -77,7 +51,6 @@ void list::insert(int size_data) {
         temp = temp->next;
     }
 
-    // this part actually does the assigning of the pointer values.
     new_node->next = temp->next;
     temp->next = new_node;
 
@@ -93,7 +66,7 @@ void list::display_list() {
     insertion*/
     node *temp = head;
     cout << "List: ";
-    // if no nodes, no elements, just a nullptr
+    // if no nodes there are no elements, just a nullptr
     if (temp == nullptr) {
         cout << "[no elements in list]";
     }
@@ -107,14 +80,14 @@ void list::display_list() {
     return;
 }
 
-
 int list::search_element(int search_value) {
     // create temporary node to act as shuttle
     node *temp2 = head;
-    int index = 0; // init index at 0
+    // init index at 0
+    int index = 0;
 
-    // this begins the traversal and ends it, but thinking about it, i don't believe I need to end it like this.
-    while (temp2 != nullptr && temp2->data <= search_value){
+    // this begins the traversal and ends after it hits terminal node
+    while (temp2 != nullptr){
         // this prints success message when element is found
         if (temp2->data == search_value) {
             cout << "Value " << search_value << " found at index " << index << endl;
@@ -130,11 +103,25 @@ int list::search_element(int search_value) {
     return 0;
 }
 
+// the littl'st function!
 void reset_list_size() {
     size_of_list = 0;
 }
 
+// user menu
+void show_menu() {
+    cout << "What would you like to do? \n"
+    "1. Create New List \n"
+    "2. Display List \n"
+    "3. Add item to List\n"
+    "4. Search for item\n"
+    "5. Run Test Module \n"
+    "6. Populate list \n"
+    "7. Quit \n"  << endl;
+}
+
 int test_module() {
+    // reset list counter and do a bunch of stuff
     reset_list_size();
     cout << "\nWELCOME TO THE TEST MODULE!" << endl;
     cout << "------------------------" << endl;
@@ -196,90 +183,5 @@ int test_module() {
     cout << "Search for 2 - ";
     test_list.search_element(2);
 
-    return 0;
-}
-
-
-// user menu
-void show_menu(void) {
-    cout << "What would you like to do? \n"
-    "1. Create New List \n"
-    "2. Display List \n"
-    "3. Add item to List\n"
-    "4. Search for item\n"
-    "5. Run Test Module \n"
-    "6. Populate list \n"
-    "7. Quit \n"  << endl;
-}
-
-
-int main() {
-    // introduction
-    cout << "Auto Sorting List Program" << endl;
-
-    while (true) {
-        // I like creating the base list here, instead of above. idk why. Just like it better.
-        // Need creater this list to solve call display_list() error on run.
-        list my_list;
-        int menu1;
-        int menu_start = 1;
-        int menu_end = 7;
-        cout << "\n" << endl;
-
-        show_menu();
-
-        if (cin >> menu1 && menu1 >= menu_start && menu1 <= menu_end) {
-            switch (menu1) {
-            case 1:
-                // create list - working
-                // create new list effectively deletes the old linked list, but not literally.
-                // "forgets" but does not delete.
-                list my_list;
-                my_list.create_list();
-                reset_list_size();
-                break;
-            case 2:
-                // display list - working
-                my_list.display_list();
-                break;
-            case 3:
-                // Add item to list - working
-                cout << "Value to add: ";
-                my_list.insert(my_list.ask_for_data());
-                break;
-            case 4:
-                // Search for item - not even close to working
-                cout << "Value to search: ";
-                my_list.search_element(my_list.ask_for_data());
-                break;
-            case 5:
-                // Test Module - working
-                test_module();
-                break;
-            case 6:
-                // Populate list - used in testing
-                my_list.insert(1);
-                my_list.insert(0);
-                my_list.insert(4);
-                my_list.insert(9);
-                my_list.insert(7);
-                my_list.insert(2);
-                my_list.insert(3);
-                break;
-            case 7:
-                // Quit - working
-                cout << "Quitting..." << endl;
-                system("pause");
-                return 0;
-            default:
-                break;
-            }
-        } else {
-            cout << "Please choose a valid menu choice" << endl;
-            cin.clear();
-            // this prevents string input
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-    }
     return 0;
 }

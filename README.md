@@ -1,9 +1,17 @@
 # Assignment5_cs260_S24  
 Hello, welcome to readme for an auto sorting list!  
 
+# Locations:  
+the inserting begins at line 35 of auto_sort.cpp  
+The efficient linear search begins on line 84 of auto_sort.cpp  
+
 # Notes  
 Okay, I am still terrible at following instructions. What we want is an auto-sorting list! I can still use large parts of 
 my design, but I need to remove some aspects, and have already implemented others. Need to search for element most of all.  
+
+I got it all running the way I want, and I am seeing how much the precious assignment really prepared me for this.  
+
+Note to Joseph Jess: Use option 5 on the main menu to run the test module.   
 
 
 # Instructions  
