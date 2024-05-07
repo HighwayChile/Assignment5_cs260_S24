@@ -60,12 +60,12 @@ void list::insert(int size_data) {
 
 
 void list::display_list() {
-    cout << "Size of list: " << size_of_list << endl;
+    cout << "Size of list : " << size_of_list << " elements" << endl;
     /* I like to think of this temp node as a shuttle on a loom 
     or maybe like the head of a typwriter, but this one allows 
     insertion*/
     node *temp = head;
-    cout << "List: ";
+    cout << "List elements: ";
     // if no nodes there are no elements, just a nullptr
     if (temp == nullptr) {
         cout << "[no elements in list]";
@@ -182,6 +182,12 @@ int test_module() {
     cout << "------------------------" << endl;
     cout << "Search for 2 - ";
     test_list.search_element(2);
+
+    cout << "\ndisplay empty list" << endl;
+    cout << "------------------------" << endl;
+    test_list.display_list();
+
+
 
     return 0;
 }
